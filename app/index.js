@@ -25,10 +25,8 @@ d.addEventListener("click", (e) => {
       );
     }
   });
-  // if (!e.target.matches("#link-url *")) return;
-  // console.log("presionaste");
-  // console.log(e.target.parentNode.parentNode);
 });
 const defaultTheme = localStorage.getItem("temaR&M");
-console.log(defaultTheme);
-d.body.classList.add(defaultTheme);
+// console.log(defaultTheme);
+if (!defaultTheme) d.body.classList.add("light");
+else d.body.classList.add(defaultTheme);

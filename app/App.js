@@ -16,7 +16,6 @@ export async function App(props) {
     if (!res.ok) throw { status: res.status, statusText: res.statusText };
     const data = await res.json();
     // console.log(data);
-    console.log(data);
     Router(data);
   } catch (err) {
     const $root = document.getElementById("root");
