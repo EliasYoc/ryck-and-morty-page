@@ -1,9 +1,9 @@
 import { ajax } from "./helpers/ajax.js";
-import { CartoonCard } from "./components/CartoonCard.js";
 import { Aside } from "./components/Aside.js";
 import { CharacterCard } from "./components/CharacterCard.js";
 import { ReturnPage } from "./components/ReturnPage.js";
 import { EpisodeCard } from "./components/EpisodeCard.js";
+import { loadCharacter } from "./helpers/loadCharacters.js";
 
 export async function Router(props) {
   const { characters, locations, episodes } = props;
@@ -19,17 +19,8 @@ export async function Router(props) {
     $main.insertAdjacentElement("afterend", Aside());
     const $aside = d.getElementById("aside");
     $aside.innerHTML = "<h3>Episodios</h3>";
-    await ajax({
-      url: characters,
-      cbSuccess: (json) => {
-        let html = "";
-        json.results.forEach((el) => {
-          html += CartoonCard(el);
-        });
-        $main.innerHTML = html;
-        $loader.style.display = "none";
-      },
-    });
+    loadCharacter(characters);
+
     await ajax({
       url: episodes,
       cbSuccess: (json) => {

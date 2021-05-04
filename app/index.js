@@ -1,10 +1,17 @@
 import { App } from "./App.js";
+import { loadCharacter } from "./helpers/loadCharacters.js";
 const d = document;
 d.addEventListener("DOMContentLoaded", App);
 window.addEventListener("hashchange", App);
 d.addEventListener("click", (e) => {
+  if (e.target.matches(".link")) {
+    const $loader = d.querySelector(".loader");
+    $loader.style.display = "block";
+    if (e.target.dataset.link === "null") return;
+    loadCharacter(e.target.dataset.link);
+    return;
+  }
   if (e.target.matches(".switch") || e.target.matches(".switch *")) {
-    console.log("switch");
     d.body.classList.toggle("dark");
     d.body.classList.toggle("light");
     const theme = d.body.classList;
@@ -14,8 +21,7 @@ d.addEventListener("click", (e) => {
   e.path.forEach((el) => {
     // console.warn(el.id);
     if (el.id === "link-url") {
-      console.warn(el);
-      console.log(el.dataset.url);
+      // console.log(el.dataset.url);
       localStorage.setItem(
         "personaje",
         JSON.stringify({
